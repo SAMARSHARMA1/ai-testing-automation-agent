@@ -10,9 +10,12 @@ import {
 import { Button } from "../ui/button";
 import {
   CheckCircle2,
+  Globe2Icon,
+  Link2Icon,
   ListChecks,
   Loader2,
   Loader2Icon,
+  Settings2,
   Sparkles,
   TrendingUp,
   XCircle,
@@ -20,9 +23,11 @@ import {
 import axios from "axios";
 import { UserDetailContext } from "@/context/UserDetailContext";
 import TestCaseList from "./TestCaseList";
+import RepoSettings from "./RepoSettings";
 
 type props = {
   repoList: UserRepo[];
+  setReload:()=> void;
 };
 
 export type TestCase={
@@ -45,7 +50,7 @@ type StatusData={
   passRate: number;
 }
 
-const UserRepoList = ({ repoList }: props) => {
+const UserRepoList = ({ repoList,setReload }: props) => {
 
   const [statusData,setStatusData]=useState<StatusData>({
      totalTests: 0,
@@ -125,6 +130,16 @@ const UserRepoList = ({ repoList }: props) => {
             </AccordionTrigger>
             <AccordionContent>
               <div className="pt-4 space-y-6">
+
+                <div className="bg-gray-50 p-3 border rounded-xl flex justify-between items-center">
+                  <div className="flex gap-3 items-center">
+                    <Link2Icon className="text-primary"/>
+                    <h2>Target Domain:</h2>
+                    <h2 className="bg-white p-1 px-2 border rounded-md text-primary font-medium">{repo?.targetDomain}</h2>
+                  </div>
+                  <RepoSettings repo={repo} setReload={setReload}/>
+                  
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <StatusCard
                     title="Total Tests"
@@ -137,7 +152,7 @@ const UserRepoList = ({ repoList }: props) => {
                     value={statusData?.passedTests}
                     icon={<CheckCircle2 className="h-5 w-5 text-green-600" />}
                     bgColor="bg-green-50"
-                  />
+                  /> 
                   <StatusCard
                     title="Failed"
                     value={statusData?.failedTests}
