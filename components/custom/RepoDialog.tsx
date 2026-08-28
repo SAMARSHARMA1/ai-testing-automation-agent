@@ -26,9 +26,7 @@ export type Repo = {
   language: string;
   updated_at: string;
   default_branch: string;
-  owner: {
-    login: string;
-  };
+  owner: string;
 };
 
 const RepoDialog = ({
@@ -73,7 +71,7 @@ const RepoDialog = ({
       html_url: selectedRepo.html_url,
       description: selectedRepo.description,
       userId: userDetail?.id,
-      owner: selectedRepo.owner.login,
+      owner: selectedRepo.owner,
       updatedAt: selectedRepo.updated_at,
       language: selectedRepo.language,
       default_branch: selectedRepo.default_branch,

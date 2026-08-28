@@ -5,6 +5,7 @@ import { Checkbox } from '../ui/checkbox'
 import {Badge} from '../ui/badge'
 import { Play, RefreshCw, SettingsIcon } from 'lucide-react'
 import { Button } from '../ui/button'
+import TestCaseSettingDialog from './TestCaseSettingDialog'
 
 type Props = {
     testCases: TestCase[],
@@ -47,9 +48,7 @@ const TestCaseList = ({testCases,onReload}:Props) => {
             <div className='gap-4 flex'>
               <Badge variant={'secondary'}>{testCase?.type}</Badge>
               <Badge variant={'secondary'}>Pending</Badge>
-              <Button variant="outline" size="icon"> {/* Changed to outline variant */}
-                <SettingsIcon className='h-4 w-4'/>
-                </Button>
+              <TestCaseSettingDialog testCase={testCase} setReload={onReload}/>
             </div>
            </div>
         ))}
